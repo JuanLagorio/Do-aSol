@@ -514,7 +514,7 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
         // Update displayed price
         if (window.preciosActuales) {
-          var precio  = window.preciosActuales[id + '_' + s.key];
+          var precio  = window.preciosActuales[s.key ? id + '_' + s.key : id];
           var priceEl = card.querySelector('.product-card-price');
           if (priceEl) {
             priceEl.textContent = precio != null

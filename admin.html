@@ -468,7 +468,7 @@
     { id: 'guantes-negros',      nombre: 'Guantes Negros' },
     { id: 'guantes-amarillos',   nombre: 'Guantes Amarillos' },
     { id: 'jabon-ropa',          nombre: 'Detergente Líquido' },
-    { id: 'suavizante',          nombre: 'Suavizante' },
+    { id: 'suavizante',          nombre: 'Suavizante',                 sizes: [{label:'5L',key:''},{label:'10L',key:'10L'}] },
     { id: 'ideal',               nombre: 'Jabón p/Lavarropas Dúo',     sizes: [{label:'5L',key:'5L'},{label:'10L',key:'10L'}] },
     { id: 'cera-pisos',          nombre: 'Cera al Agua' },
     { id: 'desengrasante',       nombre: 'Desengrasante' },
@@ -563,7 +563,7 @@
     PRODUCTOS.forEach(function(p) {
       if (p.sizes) {
         p.sizes.forEach(function(s) {
-          var key = p.id + '_' + s.key;
+          var key = s.key ? p.id + '_' + s.key : p.id;
           var val = basePrices[key] !== undefined ? basePrices[key] : '';
           var tr  = document.createElement('tr');
           tr.innerHTML =
@@ -707,7 +707,7 @@
     PRODUCTOS.forEach(function(p) {
       if (p.sizes) {
         p.sizes.forEach(function(s) {
-          var key  = p.id + '_' + s.key;
+          var key  = s.key ? p.id + '_' + s.key : p.id;
           var base = basePrices[key] !== undefined ? '$' + basePrices[key] : '—';
           var val  = clientPrices[key] !== undefined ? clientPrices[key] : '';
           var tr   = document.createElement('tr');

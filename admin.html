@@ -196,6 +196,7 @@
     }
     .client-name { font-weight: 700; font-size: 0.98rem; margin-bottom: 3px; }
     .client-link { font-size: 0.76rem; color: #71717A; word-break: break-all; }
+    .client-contact { font-size: 0.8rem; color: #3F3F46; margin-bottom: 2px; word-break: break-all; }
     .client-actions { display: flex; gap: 8px; flex-shrink: 0; }
     .btn-sm {
       padding: 7px 13px;
@@ -416,6 +417,19 @@
         </div>
       </div>
 
+      <!-- Para que el agente reconozca al cliente cuando escribe. Se guarda en
+           "contactos", aparte: no aparece en el catálogo del cliente. -->
+      <div class="fields-row">
+        <div class="field">
+          <label>Mail <span class="label-hint">(si son varios, separalos con coma)</span></label>
+          <input type="text" id="cin-mail" placeholder="Ej: compras@restaurantecarlos.com" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label>Teléfono / WhatsApp <span class="label-hint">(ídem)</span></label>
+          <input type="text" id="cin-telefono" placeholder="Ej: 099 123 456" autocomplete="off" />
+        </div>
+      </div>
+
       <p class="modal-section-title">
         <strong>Precios personalizados</strong>
         <span class="label-hint"> — Dejá vacío para usar el precio base</span>
@@ -500,6 +514,7 @@
   var auth        = firebase.auth();
   var basePrices  = {};
   var clientsList = [];
+  var contactsBySlug = {}; // slug → { mail, telefono } (colección "contactos")
   var editingSlug = null;
   var toastTimer;
 
@@ -549,13 +564,17 @@
   }
 
   function loadClients() {
-    db.collection('clientes').get().then(function(snap) {
-      clientsList = snap.docs.map(function(d) {
+    // Si "contactos" no se puede leer, la lista de clientes se muestra igual.
+    var contactos = db.collection('contactos').get().catch(function() { return { docs: [] }; });
+    Promise.all([db.collection('clientes').get(), contactos]).then(function(res) {
+      clientsList = res[0].docs.map(function(d) {
         return Object.assign({ id: d.id }, d.data());
       });
       clientsList.sort(function(a, b) {
         return a.nombre.localeCompare(b.nombre, 'es');
       });
+      contactsBySlug = {};
+      res[1].docs.forEach(function(d) { contactsBySlug[d.id] = d.data(); });
       renderClientsList();
     });
   }
@@ -612,12 +631,15 @@
     }
     container.innerHTML = '';
     clientsList.forEach(function(client) {
-      var link = getClientLink(client.id);
-      var card = document.createElement('div');
+      var link     = getClientLink(client.id);
+      var contacto = contactsBySlug[client.id] || {};
+      var datos    = [contacto.mail, contacto.telefono].filter(Boolean).join(' · ');
+      var card     = document.createElement('div');
       card.className = 'client-card';
       card.innerHTML =
         '<div class="client-info">' +
           '<div class="client-name">' + escHtml(client.nombre) + '</div>' +
+          (datos ? '<div class="client-contact">' + escHtml(datos) + '</div>' : '') +
           '<div class="client-link">' + escHtml(link) + '</div>' +
         '</div>' +
         '<div class="client-actions">' +
@@ -657,21 +679,28 @@
     var titleEl = document.getElementById('modal-title');
     var nomEl   = document.getElementById('cin-nombre');
     var slgEl   = document.getElementById('cin-slug');
+    var mailEl  = document.getElementById('cin-mail');
+    var telEl   = document.getElementById('cin-telefono');
     document.getElementById('msg-modal').textContent = '';
     document.getElementById('btn-modal-save').disabled = false;
 
     if (slug) {
-      var client = clientsList.find(function(c) { return c.id === slug; });
+      var client   = clientsList.find(function(c) { return c.id === slug; });
+      var contacto = contactsBySlug[slug] || {};
       titleEl.textContent = 'Editar cliente';
       nomEl.value         = client.nombre;
       slgEl.value         = client.id;
       slgEl.readOnly      = true;
+      mailEl.value        = contacto.mail || '';
+      telEl.value         = contacto.telefono || '';
       renderClientPricesTable(client.precios || {});
     } else {
       titleEl.textContent = 'Nuevo cliente';
       nomEl.value         = '';
       slgEl.value         = '';
       slgEl.readOnly      = false;
+      mailEl.value        = '';
+      telEl.value         = '';
       renderClientPricesTable({});
     }
 
@@ -737,8 +766,10 @@
   }
 
   document.getElementById('btn-modal-save').addEventListener('click', function() {
-    var nombre = document.getElementById('cin-nombre').value.trim();
-    var slug   = document.getElementById('cin-slug').value.trim();
+    var nombre   = document.getElementById('cin-nombre').value.trim();
+    var slug     = document.getElementById('cin-slug').value.trim();
+    var mail     = document.getElementById('cin-mail').value.trim();
+    var telefono = document.getElementById('cin-telefono').value.trim();
 
     if (!nombre) { showMsg('msg-modal', 'Ingresá el nombre del cliente', true); return; }
     if (!slug)   { showMsg('msg-modal', 'Ingresá el identificador', true); return; }
@@ -746,6 +777,8 @@
       showMsg('msg-modal', 'El identificador solo puede tener letras minúsculas, números y guiones', true);
       return;
     }
+    var mailMal = mail.split(/[,;]/).some(function(m) { m = m.trim(); return m && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m); });
+    if (mailMal) { showMsg('msg-modal', 'Revisá el mail (si son varios, separalos con coma)', true); return; }
 
     var precios = {};
     document.querySelectorAll('#client-prices-tbody .client-price-input').forEach(function(inp) {
@@ -763,10 +796,23 @@
     btnSave.disabled    = true;
     btnSave.textContent = 'Guardando...';
 
+    // Primero la ficha (como siempre) y después el contacto. Si el contacto no
+    // se puede guardar (por ejemplo, si las reglas de Firebase todavía no
+    // tienen "contactos"), la ficha queda guardada igual y se avisa.
     db.collection('clientes').doc(slug).set(data).then(function() {
+      return db.collection('contactos').doc(slug).set({ mail: mail, telefono: telefono }).then(
+        function() { return true; },
+        function() { return false; }
+      );
+    }).then(function(contactoGuardado) {
       closeModal();
       loadClients();
-      showToast('Cliente "' + nombre + '" guardado ✓');
+      if (contactoGuardado || (!mail && !telefono)) {
+        showToast('Cliente "' + nombre + '" guardado ✓');
+      } else {
+        alert('Se guardó el cliente "' + nombre + '", pero NO su mail ni su teléfono.\n' +
+              'Falta agregar "contactos" en las reglas de Firebase.');
+      }
     }).catch(function(err) {
       showMsg('msg-modal', 'Error: ' + err.message, true);
       btnSave.disabled    = false;
@@ -778,6 +824,9 @@
   function deleteClient(slug, nombre) {
     if (!confirm('¿Eliminar al cliente "' + nombre + '"?\nEsta acción no se puede deshacer.')) return;
     db.collection('clientes').doc(slug).delete().then(function() {
+      // Su contacto también (si no se puede, no importa: sin ficha no se usa).
+      return db.collection('contactos').doc(slug).delete().catch(function() {});
+    }).then(function() {
       loadClients();
       showToast('Cliente eliminado');
     });

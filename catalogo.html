@@ -4,35 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Catálogo – Doña Sol</title>
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-    /* Banner de catálogo personalizado */
-    #cliente-banner {
-      background: rgba(0,0,0,0.35);
-      color: #fff;
-      text-align: center;
-      padding: 11px 24px;
-      font-size: 0.88rem;
-      line-height: 1.5;
-    }
-    #cliente-banner strong { color: #FFD600; }
-
-    /* Botón de volver — solo visible en catálogo normal (sin ?c=) */
-    .cat-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: rgba(255,255,255,0.75);
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-      transition: color .2s;
-    }
-    .cat-back:hover { color: var(--yellow); }
-    .cat-back::before { content: '←'; font-size: 1rem; }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=20261106" />
 </head>
 <body>
+
+  <!-- ICONOS -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5 12 4l8.5 6.5V20h-5.5v-6h-6v6H3.5z"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-factory" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20.5V10l5.5 3.2V10l5.5 3.2V4.5h3.5l1 4.5H21v11.5H3Z"/><path d="M7 17h2M12 17h2M17 17h1"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 19.5 6v5.2c0 4.6-3.1 8.4-7.5 9.8-4.4-1.4-7.5-5.2-7.5-9.8V6L12 3Z"/><path d="m8.8 12 2.3 2.3 4.2-4.4"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12.2V3.5h8.7l9 9-8.7 8.7-9-9Z"/><circle cx="8" cy="8" r="1.6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5 5.5 4h13L20 9.5M4 9.5h16M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0M5.5 12v8h13v-8M10 20v-4.5h4V20"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 8h13l-1 12.5h-11L5.5 8Z"/><path d="M9 10.5V7a3 3 0 0 1 6 0v3.5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></symbol>
+  </svg>
 
   <!-- OVERLAY -->
   <div id="overlay"></div>
@@ -48,7 +41,7 @@
     </div>
     <div class="cart-dd-footer">
       <button id="btn-cart-clear" class="btn-cart-clear" style="display:none">Vaciar</button>
-      <a id="btn-cart-order" href="#" target="_blank" class="btn-cart-order" style="display:none">💬 Realizar pedido</a>
+      <a id="btn-cart-order" href="#" target="_blank" class="btn-cart-order" style="display:none"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg> Enviar pedido por WhatsApp</a>
     </div>
   </div>
 
@@ -61,13 +54,13 @@
       <button id="btn-close" aria-label="Cerrar menú">✕</button>
     </div>
     <nav class="sidebar-nav">
-      <a href="./index.html#hero" class="nav-link"><span class="nav-icon">🏠</span> Inicio</a>
-      <a href="catalogo.html" class="nav-link active"><span class="nav-icon">🧹</span> Catálogo</a>
-      <a href="./index.html#nosotros" class="nav-link"><span class="nav-icon">🏭</span> Acerca de Nosotros</a>
-      <a href="./index.html#ventajas" class="nav-link"><span class="nav-icon">⭐</span> ¿Por qué elegirnos?</a>
-      <a href="./index.html#contacto" class="nav-link"><span class="nav-icon">📞</span> Contacto</a>
+      <a href="https://www.donasol.com.uy/" class="nav-link"><svg class="nav-icon" aria-hidden="true"><use href="#i-home"/></svg> Inicio</a>
+      <a href="catalogo.html" class="nav-link active"><svg class="nav-icon" aria-hidden="true"><use href="#i-grid"/></svg> Catálogo</a>
+      <a href="https://www.donasol.com.uy/#nosotros" class="nav-link"><svg class="nav-icon" aria-hidden="true"><use href="#i-factory"/></svg> Acerca de Nosotros</a>
+      <a href="https://www.donasol.com.uy/#nosotros" class="nav-link"><svg class="nav-icon" aria-hidden="true"><use href="#i-shield"/></svg> ¿Por qué elegirnos?</a>
+      <a href="https://www.donasol.com.uy/#contacto" class="nav-link"><svg class="nav-icon" aria-hidden="true"><use href="#i-phone"/></svg> Contacto</a>
       <div class="sidebar-divider"></div>
-      <a href="https://wa.me/59892747716" target="_blank" class="nav-link"><span class="nav-icon">💬</span> WhatsApp</a>
+      <a href="https://wa.me/59892747716" target="_blank" class="nav-link"><svg class="nav-icon" aria-hidden="true"><use href="#i-wa"/></svg> WhatsApp</a>
     </nav>
     <div class="sidebar-footer">
       <p><strong>Doña Sol de Levin y Levin</strong><br/>
@@ -89,7 +82,7 @@
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span id="cart-badge" class="cart-badge" style="display:none">0</span>
       </button>
-      <a href="./index.html#contacto" class="header-cta">Consultar</a>
+      <a href="https://wa.me/59892747716" target="_blank" class="header-cta"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg> Consultar</a>
     </div>
   </header>
 
@@ -97,30 +90,53 @@
 
     <!-- PRODUCTOS — misma estructura que index.html -->
     <section id="productos">
-      <div class="section-inner">
 
-        <!-- Banner cliente personalizado (oculto por defecto) -->
-        <div id="cliente-banner" style="display:none; margin: -40px -24px 32px; padding: 11px 24px;">
-          <div>Catálogo personalizado para <strong id="cliente-banner-nombre"></strong></div>
+      <!-- Banner cliente personalizado (oculto por defecto) -->
+      <div id="cliente-banner" style="display:none">
+        <div class="cliente-banner-inner">
+          <svg class="ico" aria-hidden="true"><use href="#i-store"/></svg>
+          <span>Catálogo personalizado para <strong id="cliente-banner-nombre"></strong></span>
         </div>
+      </div>
 
-        <!-- Volver al inicio (solo en catálogo normal) -->
-        <div id="cat-back-wrap">
-          <a href="./index.html" class="cat-back">Volver al inicio</a>
+      <!-- Encabezado del catálogo -->
+      <div class="catalog-top">
+        <div class="section-inner catalog-top-inner">
+          <div class="catalog-hero">
+            <!-- Volver al inicio (solo en catálogo normal) -->
+            <div id="cat-back-wrap">
+              <a href="https://www.donasol.com.uy/" class="cat-back">Volver al inicio</a>
+            </div>
+            <div class="section-label">Catálogo de productos</div>
+            <h1 class="catalog-title">Productos de limpieza directo de fábrica.</h1>
+            <p class="section-desc">
+              Para el hogar, el comercio y la industria. Elegí los productos, armá tu pedido y envialo por WhatsApp: te confirmamos precio y disponibilidad.
+            </p>
+            <ul class="catalog-facts">
+              <li><svg class="ico" aria-hidden="true"><use href="#i-factory"/></svg> Fabricación propia</li>
+              <li><svg class="ico" aria-hidden="true"><use href="#i-tag"/></svg> Precios de fábrica</li>
+              <li><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg> Lun a Vie · 8 a 17 h</li>
+            </ul>
+          </div>
+
+          <div class="catalog-photos" aria-hidden="true">
+            <img class="catalog-photo-main" src="Fotos%20Dona%20sol/portada+limpieza-468w.webp" alt="" width="468" height="313" />
+            <img src="Fotos%20Dona%20sol/Empresa_productos.jpg" alt="" width="286" height="176" />
+            <img src="Fotos%20Dona%20sol/Empresa_industria.jpg" alt="" width="275" height="183" />
+          </div>
         </div>
+      </div>
 
-        <div class="catalog-hero">
-          <div class="section-label">Catálogo</div>
-          <h1 class="section-title">Nuestros <span class="accent">Productos</span></h1>
-          <p class="section-desc">
-            Productos de limpieza para el hogar, comercios e industria. Fabricación propia, calidad garantizada.
-          </p>
-        </div>
+      <div class="section-inner catalog-body">
 
-        <div class="category-tabs" id="filter-bar">
-          <button class="tab-btn active" data-filter="todos">Todos</button>
-          <button class="tab-btn" data-filter="textil">Textil</button>
-          <button class="tab-btn" data-filter="papeles">Papeles</button>
+        <div class="catalog-toolbar">
+          <div class="category-tabs" id="filter-bar">
+            <button class="tab-btn active" data-filter="todos">Todos</button>
+            <button class="tab-btn" data-filter="hogar">Química</button>
+            <button class="tab-btn" data-filter="textil">Textil</button>
+            <button class="tab-btn" data-filter="papeles">Papeles</button>
+          </div>
+          <p class="catalog-note">Tocá un producto para ver el detalle.</p>
         </div>
 
         <div class="products-grid">
@@ -705,6 +721,16 @@
           </div>
 
         </div><!-- /products-grid -->
+
+        <!-- Cierre: consulta por WhatsApp -->
+        <div class="catalog-ask">
+          <img class="catalog-ask-img" src="Fotos%20Dona%20sol/Empresa_reparto.jpg" alt="Camiones de reparto de Doña Sol" width="347" height="145" loading="lazy" />
+          <div class="catalog-ask-txt">
+            <h2>¿Buscás algo que no está en la lista?</h2>
+            <p>Escribinos y te asesoramos. Coordinamos el pedido y la entrega por WhatsApp.</p>
+          </div>
+          <a href="https://wa.me/59892747716" target="_blank" class="catalog-ask-btn"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg> Escribir por WhatsApp</a>
+        </div>
       </div><!-- /section-inner -->
     </section>
 
@@ -721,9 +747,9 @@
         <h2 id="pmodal-name"></h2>
         <p id="pmodal-desc"></p>
         <span id="pmodal-volume" class="product-card-volume" style="display:none;"></span>
-        <button id="pmodal-add-cart" class="pmodal-btn-cart">🛒 Agregar al carrito</button>
+        <button id="pmodal-add-cart" class="pmodal-btn-cart"><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg> Agregar al carrito</button>
         <a id="pmodal-wa" href="#" target="_blank" class="pmodal-btn-wa">
-          💬 Consultar por WhatsApp
+          <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg> Consultar por WhatsApp
         </a>
       </div>
     </div>
@@ -737,15 +763,15 @@
           <div class="brand-logo">
             <img src="Fotos%20Dona%20sol/Logo.JPG" alt="Doña Sol" class="footer-logo-img" />
           </div>
-          <p>Fábrica de productos de limpieza para el hogar, comercios e industria. Montevideo, Uruguay.</p>
+          <p>Fábrica de productos de limpieza para el hogar, comercios e industria. Lauro Müller 2008, Montevideo. Lunes a viernes de 8:00 a 17:00.</p>
         </div>
         <div class="footer-col">
           <h4>Navegación</h4>
           <ul>
-            <li><a href="./index.html">Inicio</a></li>
+            <li><a href="https://www.donasol.com.uy/">Inicio</a></li>
             <li><a href="catalogo.html">Catálogo</a></li>
-            <li><a href="./index.html#nosotros">Nosotros</a></li>
-            <li><a href="./index.html#contacto">Contacto</a></li>
+            <li><a href="https://www.donasol.com.uy/#nosotros">Nosotros</a></li>
+            <li><a href="https://www.donasol.com.uy/#contacto">Contacto</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -759,10 +785,10 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2024 <span class="accent">Doña Sol de Levin y Levin</span> · Todos los derechos reservados</p>
+        <p>© 2026 <span class="accent">Doña Sol de Levin y Levin</span> · Todos los derechos reservados</p>
         <div class="social-links">
-          <a href="https://wa.me/59892747716" target="_blank" title="WhatsApp">💬</a>
-          <a href="mailto:donasol@adinet.com.uy" title="Email">✉️</a>
+          <a href="https://wa.me/59892747716" target="_blank" title="WhatsApp" aria-label="WhatsApp"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></a>
+          <a href="mailto:donasol@adinet.com.uy" title="Email" aria-label="Email"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg></a>
         </div>
       </div>
     </div>

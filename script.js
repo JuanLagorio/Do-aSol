@@ -192,11 +192,11 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     const name = nameEl.textContent.trim();
     const id   = card.dataset.id || name.toLowerCase().replace(/\s+/g, '-');
 
-    // Round "+" add button (visible when qty = 0)
+    // Botón "Agregar" (visible cuando la cantidad es 0)
     const addBtn = document.createElement('button');
     addBtn.className = 'product-card-add-btn';
     addBtn.setAttribute('aria-label', 'Agregar al carrito');
-    addBtn.textContent = '+';
+    addBtn.innerHTML = '<span aria-hidden="true">+</span> Agregar';
 
     // Pill qty control (visible when qty > 0)
     const ctrl   = document.createElement('div');

@@ -4,20 +4,24 @@ const overlay  = document.getElementById('overlay');
 const btnMenu  = document.getElementById('btn-menu');
 const btnClose = document.getElementById('btn-close');
 
+// catalogo.html ya no tiene menú; index.html sí. Sin menú, este bloque no hace nada.
 function openSidebar() {
+  // Si el menú no está o está oculto, no bloquear el scroll de la página
+  if (!sidebar || getComputedStyle(sidebar).display === 'none') return;
   sidebar.classList.add('open');
-  overlay.classList.add('active');
+  if (overlay) overlay.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 function closeSidebar() {
+  if (!sidebar) return;
   sidebar.classList.remove('open');
-  overlay.classList.remove('active');
+  if (overlay) overlay.classList.remove('active');
   document.body.style.overflow = '';
 }
 
-btnMenu.addEventListener('click', openSidebar);
-btnClose.addEventListener('click', closeSidebar);
-overlay.addEventListener('click', closeSidebar);
+if (btnMenu)  btnMenu.addEventListener('click', openSidebar);
+if (btnClose) btnClose.addEventListener('click', closeSidebar);
+if (overlay)  overlay.addEventListener('click', closeSidebar);
 
 document.querySelectorAll('.nav-link').forEach(link => {
   link.addEventListener('click', closeSidebar);

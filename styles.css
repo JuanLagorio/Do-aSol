@@ -180,6 +180,8 @@ button { font: inherit; }
   transform: translateX(-50%);
 }
 .header-logo-img { height: 48px; width: auto; border-radius: 8px; }
+/* catalogo.html no tiene menú: el logo va a la izquierda */
+.header-logo--left { position: static; transform: none; }
 
 .header-right { display: flex; align-items: center; gap: 8px; position: relative; }
 

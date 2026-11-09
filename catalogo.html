@@ -6,8 +6,8 @@
   <title>Catálogo – Doña Sol</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261106c" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=20261109" />
 </head>
 <body>
 
@@ -58,7 +58,8 @@
 
   <main>
 
-    <!-- PRODUCTOS — misma estructura que index.html -->
+    <!-- PRODUCTOS — mismas categorías, orden y fotos que la tienda de donasol.com.uy.
+         data-cat da el color de fondo de la foto; style="--z:…" la agranda (igual que `zoom` en productos.js). -->
     <section id="productos">
 
       <!-- Banner cliente personalizado (oculto por defecto) -->
@@ -101,10 +102,14 @@
 
         <div class="catalog-toolbar">
           <div class="category-tabs" id="filter-bar">
-            <button class="tab-btn active" data-filter="todos">Todos</button>
-            <button class="tab-btn" data-filter="hogar">Química</button>
-            <button class="tab-btn" data-filter="textil">Textil</button>
-            <button class="tab-btn" data-filter="papeles">Papeles</button>
+            <button class="tab-btn active" data-filter="todos" aria-pressed="true">Todos</button>
+            <button class="tab-btn" data-filter="limpieza" aria-pressed="false">Limpieza</button>
+            <button class="tab-btn" data-filter="lavado" aria-pressed="false">Ropa y vajilla</button>
+            <button class="tab-btn" data-filter="higiene" aria-pressed="false">Higiene</button>
+            <button class="tab-btn" data-filter="aromas" aria-pressed="false">Aromas</button>
+            <button class="tab-btn" data-filter="autos" aria-pressed="false">Autos</button>
+            <button class="tab-btn" data-filter="textil" aria-pressed="false">Textil</button>
+            <button class="tab-btn" data-filter="papeles" aria-pressed="false">Papeles</button>
           </div>
           <p class="catalog-note">Tocá un producto para ver el detalle.</p>
         </div>
@@ -112,8 +117,8 @@
         <div class="products-grid">
 
           <!-- ── LIMPIEZA ── -->
-          <div class="product-card reveal" data-category="hogar" data-id="multiuso" data-sizes="5L,10L">
-            <div class="product-card-category"></div>
+          <div class="product-card reveal" data-category="hogar" data-cat="limpieza" data-id="multiuso" data-sizes="5L,10L">
+            <div class="product-card-category">Limpieza</div>
             <div class="product-card-img">
               <img src="Fotos%20Dona%20sol/Multiuso.JPG" alt="Limpiador Multiuso" />
             </div>
@@ -127,8 +132,53 @@
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-1" data-category="hogar" data-id="limpiavidrios">
-            <div class="product-card-category"></div>
+          <div class="product-card reveal reveal-delay-1" data-category="hogar" data-cat="limpieza" data-id="mulcit" style="--z:1.45" data-sizes="5L,10L">
+            <div class="product-card-category">Limpieza</div>
+            <div class="product-card-img">
+              <img src="Fotos%20Dona%20sol/Mulcit.jpg" alt="Multiuso Cítrico" />
+            </div>
+            <div class="product-card-body">
+              <div class="product-card-name">Multiuso Cítrico</div>
+              <div class="product-card-desc">Limpiador multiuso con una fresca y duradera fragancia cítrica. Función de desinfectante para una mejor limpieza profunda.</div>
+            </div>
+            <div class="product-card-footer">
+              <span class="product-card-volume">5L o 10L</span>
+              <span class="product-card-price"></span>
+            </div>
+          </div>
+
+          <div class="product-card reveal reveal-delay-2" data-category="hogar" data-cat="limpieza" data-id="desinfectante" data-sizes="5L,10L">
+            <div class="product-card-category">Limpieza</div>
+            <div class="product-card-img">
+              <img src="Fotos%20Dona%20sol/Limpiador_desinfectante.jpg" alt="Limpiador Desinfectante" />
+            </div>
+            <div class="product-card-body">
+              <div class="product-card-name">Limpiador Desinfectante</div>
+              <div class="product-card-desc">Limpiador de alto poder desinfectante. En base a amonio cuaternario.</div>
+            </div>
+            <div class="product-card-footer">
+              <span class="product-card-volume">5L o 10L</span>
+              <span class="product-card-price"></span>
+            </div>
+          </div>
+
+          <div class="product-card reveal reveal-delay-3" data-category="hogar" data-cat="limpieza" data-id="amonio-cuaternario">
+            <div class="product-card-category">Limpieza</div>
+            <div class="product-card-img">
+              <img src="Fotos%20Dona%20sol/Amonio_cuaternario_bidon.jpg" alt="Amonio Cuaternario" />
+            </div>
+            <div class="product-card-body">
+              <div class="product-card-name">Amonio Cuaternario</div>
+              <div class="product-card-desc">Desinfectante de amplio espectro, sin olor agresivo. Apto para superficies en contacto con alimentos.</div>
+            </div>
+            <div class="product-card-footer">
+              <span class="product-card-volume">5L</span>
+              <span class="product-card-price"></span>
+            </div>
+          </div>
+
+          <div class="product-card reveal" data-category="hogar" data-cat="limpieza" data-id="limpiavidrios">
+            <div class="product-card-category">Limpieza</div>
             <div class="product-card-img">
               <img src="Fotos%20Dona%20sol/Limpiavidrios.JPG" alt="Limpia Vidrios" />
             </div>
@@ -142,8 +192,8 @@
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-2" data-category="hogar" data-id="lavandina">
-            <div class="product-card-category"></div>
+          <div class="product-card reveal reveal-delay-1" data-category="hogar" data-cat="limpieza" data-id="lavandina">
+            <div class="product-card-category">Limpieza</div>
             <div class="product-card-img">
               <img src="Fotos%20Dona%20sol/Lavandina.JPG" alt="Lavandina" />
             </div>
@@ -157,38 +207,8 @@
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-3" data-category="hogar" data-id="desinfectante" data-sizes="5L,10L">
-            <div class="product-card-category"></div>
-            <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Limpiador_desinfectante.jpg" alt="Limpiador Líquido" />
-            </div>
-            <div class="product-card-body">
-              <div class="product-card-name">Limpiador Líquido</div>
-              <div class="product-card-desc">Limpiador de alto poder desinfectante. En base a amonio cuaternario.</div>
-            </div>
-            <div class="product-card-footer">
-              <span class="product-card-volume">5L o 10L</span>
-              <span class="product-card-price"></span>
-            </div>
-          </div>
-
-          <div class="product-card reveal" data-category="hogar" data-id="amonio-cuaternario">
-            <div class="product-card-category"></div>
-            <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Amonio_cuaternario.jpg" alt="Amonio Cuaternario" />
-            </div>
-            <div class="product-card-body">
-              <div class="product-card-name">Amonio Cuaternario</div>
-              <div class="product-card-desc">Desinfectante de amplio espectro, sin olor agresivo. Apto para superficies en contacto con alimentos.</div>
-            </div>
-            <div class="product-card-footer">
-              <span class="product-card-volume">5L</span>
-              <span class="product-card-price"></span>
-            </div>
-          </div>
-
-          <div class="product-card reveal reveal-delay-1" data-category="hogar" data-id="cremoso">
-            <div class="product-card-category"></div>
+          <div class="product-card reveal reveal-delay-2" data-category="hogar" data-cat="limpieza" data-id="cremoso">
+            <div class="product-card-category">Limpieza</div>
             <div class="product-card-img">
               <img src="Fotos%20Dona%20sol/Cremoso.JPG" alt="Limpiador Cremoso" />
             </div>
@@ -202,143 +222,8 @@
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-2" data-category="hogar" data-id="alcohol-gel" data-sizes="1L,5L">
-            <div class="product-card-category"></div>
-            <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Alcoholengel.JPG" alt="Alcohol en Gel" />
-            </div>
-            <div class="product-card-body">
-              <div class="product-card-name">Alcohol en Gel</div>
-              <div class="product-card-desc">Con dosificador.</div>
-            </div>
-            <div class="product-card-footer">
-              <span class="product-card-volume">1L o 5L</span>
-              <span class="product-card-price"></span>
-            </div>
-          </div>
-
-          <div class="product-card reveal reveal-delay-3" data-category="hogar" data-id="desodorante">
-            <div class="product-card-category"></div>
-            <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Desodorante.JPG" alt="Desodorante Bactericida" />
-            </div>
-            <div class="product-card-body">
-              <div class="product-card-name">Desodorante Bactericida</div>
-              <div class="product-card-desc">Hecho con un delicioso perfume muy perdurable. Mata el 99,9% de las bacterias.</div>
-            </div>
-            <div class="product-card-footer">
-              <span class="product-card-volume">10L</span>
-              <span class="product-card-price"></span>
-            </div>
-          </div>
-
-          <div class="product-card reveal reveal-delay-1" data-category="hogar" data-id="jabon-manos">
-            <div class="product-card-category"></div>
-            <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Shampoo_manos.jpg" alt="Shampoo para Manos" />
-            </div>
-            <div class="product-card-body">
-              <div class="product-card-name">Shampoo para Manos</div>
-              <div class="product-card-desc">Limpia y desinfecta cuidando sus manos.</div>
-            </div>
-            <div class="product-card-footer">
-              <span class="product-card-volume">5L</span>
-              <span class="product-card-price"></span>
-            </div>
-          </div>
-
-          <div class="product-card reveal" data-category="hogar" data-id="jabon-ropa">
-            <div class="product-card-category"></div>
-            <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Jabon%20Liquido.JPG" alt="Detergente Líquido" />
-            </div>
-            <div class="product-card-body">
-              <div class="product-card-name">Detergente Líquido</div>
-              <div class="product-card-desc">Detergente neutro activo al 10% o 12%. Excelente para el lavado de platos u otros usos.</div>
-            </div>
-            <div class="product-card-footer">
-              <span class="product-card-volume">10L</span>
-              <span class="product-card-price"></span>
-            </div>
-          </div>
-
-          <div class="product-card reveal" data-category="hogar" data-id="jabon-liquido-economico">
-            <div class="product-card-category"></div>
-            <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Jabon_liquido_economico.jpg" alt="Detergente Líquido Económico" />
-            </div>
-            <div class="product-card-body">
-              <div class="product-card-name">Detergente Líquido Económico</div>
-              <div class="product-card-desc">La versión económica de nuestro Detergente Líquido. Neutro, para lavar platos y la limpieza de todos los días.</div>
-            </div>
-            <div class="product-card-footer">
-              <span class="product-card-volume">10L</span>
-              <span class="product-card-price"></span>
-            </div>
-          </div>
-
-          <div class="product-card reveal reveal-delay-1" data-category="hogar" data-id="suavizante" data-sizes="5L|,10L">
-            <div class="product-card-category"></div>
-            <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Suavizante_ropa.jpg" alt="Suavizante" />
-            </div>
-            <div class="product-card-body">
-              <div class="product-card-name">Suavizante</div>
-              <div class="product-card-desc">Suaviza, desinfecta y perfuma delicadamente.</div>
-            </div>
-            <div class="product-card-footer">
-              <span class="product-card-volume">5L o 10L</span>
-              <span class="product-card-price"></span>
-            </div>
-          </div>
-
-          <div class="product-card reveal reveal-delay-1" data-category="hogar" data-id="ideal" data-sizes="5L,10L">
-            <div class="product-card-category"></div>
-            <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Ideal.JPG" alt="Jabón p/Lavarropas Dúo" />
-            </div>
-            <div class="product-card-body">
-              <div class="product-card-name">Jabón p/Lavarropas Dúo</div>
-              <div class="product-card-desc">Espuma controlada. Con suavizante y blanqueador óptico. Ideal para cualquier tipo de lavado.</div>
-            </div>
-            <div class="product-card-footer">
-              <span class="product-card-volume">5L o 10L</span>
-              <span class="product-card-price"></span>
-            </div>
-          </div>
-
-          <div class="product-card reveal" data-category="hogar" data-id="shampoo-lavarropas" data-sizes="5L|,10L">
-            <div class="product-card-category"></div>
-            <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Shampoo_lavarropas.jpg" alt="Shampoo para Lavarropas" />
-            </div>
-            <div class="product-card-body">
-              <div class="product-card-name">Shampoo para Lavarropas</div>
-              <div class="product-card-desc">Resalta los colores de la ropa. Espuma controlada y perfume duradero.</div>
-            </div>
-            <div class="product-card-footer">
-              <span class="product-card-volume">5L o 10L</span>
-              <span class="product-card-price"></span>
-            </div>
-          </div>
-
-          <div class="product-card reveal" data-category="hogar" data-id="cera-pisos">
-            <div class="product-card-category"></div>
-            <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Cera.JPG" alt="Cera al Agua" />
-            </div>
-            <div class="product-card-body">
-              <div class="product-card-name">Cera al Agua</div>
-              <div class="product-card-desc">Auto brillo de secado rápido y agradable. Semi-acrílica.</div>
-            </div>
-            <div class="product-card-footer">
-              <span class="product-card-volume">5L</span>
-              <span class="product-card-price"></span>
-            </div>
-          </div>
-
-          <div class="product-card reveal reveal-delay-1" data-category="hogar" data-id="desengrasante">
-            <div class="product-card-category"></div>
+          <div class="product-card reveal reveal-delay-3" data-category="hogar" data-cat="limpieza" data-id="desengrasante">
+            <div class="product-card-category">Limpieza</div>
             <div class="product-card-img">
               <img src="Fotos%20Dona%20sol/Desengrasante.JPG" alt="Desengrasante" />
             </div>
@@ -352,28 +237,13 @@
             </div>
           </div>
 
-          <div class="product-card reveal" data-category="hogar" data-id="alcohol" data-sizes="1L,5L,10L">
-            <div class="product-card-category"></div>
+          <div class="product-card reveal" data-category="hogar" data-cat="limpieza" data-id="soda-caustica" data-sizes="5L,10L">
+            <div class="product-card-category">Limpieza</div>
             <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Alcohol.JPG" alt="Alcohol Líquido" />
+              <img src="Fotos%20Dona%20sol/Soda.JPG" alt="Soda Cáustica Líquida" />
             </div>
             <div class="product-card-body">
-              <div class="product-card-name">Alcohol Líquido</div>
-              <div class="product-card-desc">Alcohol líquido rectificado 70%.</div>
-            </div>
-            <div class="product-card-footer">
-              <span class="product-card-volume">1L, 5L o 10L</span>
-              <span class="product-card-price"></span>
-            </div>
-          </div>
-
-          <div class="product-card reveal reveal-delay-1" data-category="hogar" data-id="soda-caustica" data-sizes="5L,10L">
-            <div class="product-card-category"></div>
-            <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Soda.JPG" alt="Soda Cáustica" />
-            </div>
-            <div class="product-card-body">
-              <div class="product-card-name">Soda Cáustica</div>
+              <div class="product-card-name">Soda Cáustica Líquida</div>
               <div class="product-card-desc">Líquida 100%. Elimina y remueve todo tipo de grasas y residuos orgánicos.</div>
             </div>
             <div class="product-card-footer">
@@ -382,8 +252,23 @@
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-2" data-category="hogar" data-id="hipoclorito">
-            <div class="product-card-category"></div>
+          <div class="product-card reveal reveal-delay-1" data-category="hogar" data-cat="limpieza" data-id="cera-pisos">
+            <div class="product-card-category">Limpieza</div>
+            <div class="product-card-img">
+              <img src="Fotos%20Dona%20sol/Cera.JPG" alt="Cera al Agua" />
+            </div>
+            <div class="product-card-body">
+              <div class="product-card-name">Cera al Agua</div>
+              <div class="product-card-desc">Auto brillo de secado rápido y agradable. Semi-acrílica.</div>
+            </div>
+            <div class="product-card-footer">
+              <span class="product-card-volume">5L</span>
+              <span class="product-card-price"></span>
+            </div>
+          </div>
+
+          <div class="product-card reveal reveal-delay-2" data-category="hogar" data-cat="limpieza" data-id="hipoclorito">
+            <div class="product-card-category">Limpieza</div>
             <div class="product-card-img">
               <img src="Fotos%20Dona%20sol/Hipoclorito.JPG" alt="Hipoclorito de Sodio" />
             </div>
@@ -397,10 +282,10 @@
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-3" data-category="hogar" data-id="vinagre" data-sizes="5L,10L">
-            <div class="product-card-category"></div>
+          <div class="product-card reveal reveal-delay-3" data-category="hogar" data-cat="limpieza" data-id="vinagre" style="--z:1.5" data-sizes="5L,10L">
+            <div class="product-card-category">Limpieza</div>
             <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Vinagre.jpg" alt="Vinagre de Limpieza" />
+              <img src="Fotos%20Dona%20sol/Vinagre_recortado.jpg" alt="Vinagre de Limpieza" />
             </div>
             <div class="product-card-body">
               <div class="product-card-name">Vinagre de Limpieza</div>
@@ -412,59 +297,45 @@
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-3" data-category="hogar" data-id="perfumador" data-sizes="½L|500ml,1L">
-            <div class="product-card-category"></div>
+          <!-- ── ROPA Y VAJILLA ── -->
+          <div class="product-card reveal" data-category="hogar" data-cat="lavado" data-id="jabon-ropa">
+            <div class="product-card-category">Ropa y vajilla</div>
             <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Perfumador.JPG" alt="Perfumador" />
+              <img src="Fotos%20Dona%20sol/Jabon%20Liquido.JPG" alt="Detergente Líquido" />
             </div>
             <div class="product-card-body">
-              <div class="product-card-name">Perfumador</div>
-              <div class="product-card-desc">Aplicar sobre tapizados, tableros, cortinas, prendas, telas. Con atomizador.</div>
+              <div class="product-card-name">Detergente Líquido</div>
+              <div class="product-card-desc">Detergente neutro activo al 10% o 12%. Excelente para el lavado de platos u otros usos.</div>
             </div>
             <div class="product-card-footer">
-              <span class="product-card-volume">1/2L o 1L</span>
+              <span class="product-card-volume">10L</span>
               <span class="product-card-price"></span>
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-1" data-category="hogar" data-id="emulsion-neumaticos">
-            <div class="product-card-category"></div>
+          <div class="product-card reveal reveal-delay-1" data-category="hogar" data-cat="lavado" data-id="jabon-liquido-economico">
+            <div class="product-card-category">Ropa y vajilla</div>
             <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Emulsion_Neumaticos.jpg" alt="Emulsión Neumáticos" />
+              <img src="Fotos%20Dona%20sol/Jabon_liquido_economico.jpg" alt="Detergente Líquido Económico" />
             </div>
             <div class="product-card-body">
-              <div class="product-card-name">Emulsión Neumáticos</div>
-              <div class="product-card-desc">Brillo profundo y duradero. Protección contra el desgaste y la decoloración. Fácil aplicación y secado rápido.</div>
+              <div class="product-card-name">Detergente Líquido Económico</div>
+              <div class="product-card-desc">La versión económica de nuestro Detergente Líquido. Neutro, para lavar platos y la limpieza de todos los días.</div>
             </div>
             <div class="product-card-footer">
-              <span class="product-card-volume">5L</span>
+              <span class="product-card-volume">10L</span>
               <span class="product-card-price"></span>
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-2" data-category="hogar" data-id="emulsion-plasticos">
-            <div class="product-card-category"></div>
+          <div class="product-card reveal reveal-delay-2" data-category="hogar" data-cat="lavado" data-id="ideal" data-sizes="5L,10L">
+            <div class="product-card-category">Ropa y vajilla</div>
             <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Emulsion_plasticos.jpg" alt="Emulsión Plásticos" />
+              <img src="Fotos%20Dona%20sol/Ideal.JPG" alt="Jabón Lavarropas Dúo" />
             </div>
             <div class="product-card-body">
-              <div class="product-card-name">Emulsión Plásticos</div>
-              <div class="product-card-desc">Brillo profundo y duradero. Protección contra el desgaste y la decoloración. Fácil aplicación y secado rápido.</div>
-            </div>
-            <div class="product-card-footer">
-              <span class="product-card-volume">5L</span>
-              <span class="product-card-price"></span>
-            </div>
-          </div>
-
-          <div class="product-card reveal reveal-delay-3" data-category="hogar" data-id="mulcit" data-sizes="5L,10L">
-            <div class="product-card-category"></div>
-            <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Mulcit.jpg" alt="Limpiador Multiuso Cítrico" />
-            </div>
-            <div class="product-card-body">
-              <div class="product-card-name">Limpiador Multiuso Cítrico</div>
-              <div class="product-card-desc">Limpiador multiuso con una fresca y duradera fragancia cítrica. Función de desinfectante para una mejor limpieza profunda.</div>
+              <div class="product-card-name">Jabón Lavarropas Dúo</div>
+              <div class="product-card-desc">Espuma controlada. Con suavizante y blanqueador óptico. Ideal para cualquier tipo de lavado.</div>
             </div>
             <div class="product-card-footer">
               <span class="product-card-volume">5L o 10L</span>
@@ -472,8 +343,100 @@
             </div>
           </div>
 
-          <div class="product-card reveal" data-category="hogar" data-id="esencia">
-            <div class="product-card-category"></div>
+          <div class="product-card reveal reveal-delay-3" data-category="hogar" data-cat="lavado" data-id="suavizante" style="--z:1.55" data-sizes="5L|,10L">
+            <div class="product-card-category">Ropa y vajilla</div>
+            <div class="product-card-img">
+              <img src="Fotos%20Dona%20sol/Suavizante_recortado.jpg" alt="Suavizante" />
+            </div>
+            <div class="product-card-body">
+              <div class="product-card-name">Suavizante</div>
+              <div class="product-card-desc">Suaviza, desinfecta y perfuma delicadamente.</div>
+            </div>
+            <div class="product-card-footer">
+              <span class="product-card-volume">5L o 10L</span>
+              <span class="product-card-price"></span>
+            </div>
+          </div>
+
+          <div class="product-card reveal" data-category="hogar" data-cat="lavado" data-id="shampoo-lavarropas" data-sizes="5L|,10L">
+            <div class="product-card-category">Ropa y vajilla</div>
+            <div class="product-card-img">
+              <img src="Fotos%20Dona%20sol/Shampoo_lavarropas.jpg" alt="Shampoo para Lavarropas" />
+            </div>
+            <div class="product-card-body">
+              <div class="product-card-name">Shampoo para Lavarropas</div>
+              <div class="product-card-desc">Resalta los colores de la ropa. Espuma controlada y perfume duradero.</div>
+            </div>
+            <div class="product-card-footer">
+              <span class="product-card-volume">5L o 10L</span>
+              <span class="product-card-price"></span>
+            </div>
+          </div>
+
+          <!-- ── HIGIENE ── -->
+          <div class="product-card reveal reveal-delay-1" data-category="hogar" data-cat="higiene" data-id="alcohol-gel" data-sizes="1L,5L">
+            <div class="product-card-category">Higiene</div>
+            <div class="product-card-img">
+              <img src="Fotos%20Dona%20sol/Alcoholengel.JPG" alt="Alcohol en Gel" />
+            </div>
+            <div class="product-card-body">
+              <div class="product-card-name">Alcohol en Gel</div>
+              <div class="product-card-desc">Con dosificador.</div>
+            </div>
+            <div class="product-card-footer">
+              <span class="product-card-volume">1L o 5L</span>
+              <span class="product-card-price"></span>
+            </div>
+          </div>
+
+          <div class="product-card reveal reveal-delay-2" data-category="hogar" data-cat="higiene" data-id="alcohol" data-sizes="1L,5L,10L">
+            <div class="product-card-category">Higiene</div>
+            <div class="product-card-img">
+              <img src="Fotos%20Dona%20sol/Alcohol.JPG" alt="Alcohol Líquido 70 %" />
+            </div>
+            <div class="product-card-body">
+              <div class="product-card-name">Alcohol Líquido 70 %</div>
+              <div class="product-card-desc">Alcohol líquido rectificado 70%.</div>
+            </div>
+            <div class="product-card-footer">
+              <span class="product-card-volume">1L, 5L o 10L</span>
+              <span class="product-card-price"></span>
+            </div>
+          </div>
+
+          <div class="product-card reveal reveal-delay-3" data-category="hogar" data-cat="higiene" data-id="jabon-manos" style="--z:1.45">
+            <div class="product-card-category">Higiene</div>
+            <div class="product-card-img">
+              <img src="Fotos%20Dona%20sol/Shampoo_manos.jpg" alt="Shampoo para Manos" />
+            </div>
+            <div class="product-card-body">
+              <div class="product-card-name">Shampoo para Manos</div>
+              <div class="product-card-desc">Limpia y desinfecta cuidando sus manos.</div>
+            </div>
+            <div class="product-card-footer">
+              <span class="product-card-volume">5L</span>
+              <span class="product-card-price"></span>
+            </div>
+          </div>
+
+          <!-- ── AROMAS ── -->
+          <div class="product-card reveal" data-category="hogar" data-cat="aromas" data-id="desodorante">
+            <div class="product-card-category">Aromas</div>
+            <div class="product-card-img">
+              <img src="Fotos%20Dona%20sol/Desodorante.JPG" alt="Desodorante Bactericida" />
+            </div>
+            <div class="product-card-body">
+              <div class="product-card-name">Desodorante Bactericida</div>
+              <div class="product-card-desc">Hecho con un delicioso perfume muy perdurable. Mata el 99,9% de las bacterias.</div>
+            </div>
+            <div class="product-card-footer">
+              <span class="product-card-volume">10L</span>
+              <span class="product-card-price"></span>
+            </div>
+          </div>
+
+          <div class="product-card reveal reveal-delay-1" data-category="hogar" data-cat="aromas" data-id="esencia">
+            <div class="product-card-category">Aromas</div>
             <div class="product-card-img">
               <img src="Fotos%20Dona%20sol/Esencia.jpg" alt="Esencia Desodorante" />
             </div>
@@ -487,7 +450,54 @@
             </div>
           </div>
 
-          <div class="product-card reveal" data-category="textil" data-id="rejillas">
+          <div class="product-card reveal reveal-delay-2" data-category="hogar" data-cat="aromas" data-id="perfumador" data-sizes="½L|500ml,1L">
+            <div class="product-card-category">Aromas</div>
+            <div class="product-card-img">
+              <img src="Fotos%20Dona%20sol/Perfumador.JPG" alt="Perfumador Textil" />
+            </div>
+            <div class="product-card-body">
+              <div class="product-card-name">Perfumador Textil</div>
+              <div class="product-card-desc">Aplicar sobre tapizados, tableros, cortinas, prendas, telas. Con atomizador.</div>
+            </div>
+            <div class="product-card-footer">
+              <span class="product-card-volume">1/2L o 1L</span>
+              <span class="product-card-price"></span>
+            </div>
+          </div>
+
+          <!-- ── AUTOS ── -->
+          <div class="product-card reveal reveal-delay-3" data-category="hogar" data-cat="autos" data-id="emulsion-neumaticos" style="--z:1.45">
+            <div class="product-card-category">Autos</div>
+            <div class="product-card-img">
+              <img src="Fotos%20Dona%20sol/Emulsion_Neumaticos.jpg" alt="Emulsión Neumáticos" />
+            </div>
+            <div class="product-card-body">
+              <div class="product-card-name">Emulsión Neumáticos</div>
+              <div class="product-card-desc">Brillo profundo y duradero. Protección contra el desgaste y la decoloración. Fácil aplicación y secado rápido.</div>
+            </div>
+            <div class="product-card-footer">
+              <span class="product-card-volume">5L</span>
+              <span class="product-card-price"></span>
+            </div>
+          </div>
+
+          <div class="product-card reveal" data-category="hogar" data-cat="autos" data-id="emulsion-plasticos" style="--z:1.45">
+            <div class="product-card-category">Autos</div>
+            <div class="product-card-img">
+              <img src="Fotos%20Dona%20sol/Emulsion_plasticos.jpg" alt="Emulsión Plásticos" />
+            </div>
+            <div class="product-card-body">
+              <div class="product-card-name">Emulsión Plásticos</div>
+              <div class="product-card-desc">Brillo profundo y duradero. Protección contra el desgaste y la decoloración. Fácil aplicación y secado rápido.</div>
+            </div>
+            <div class="product-card-footer">
+              <span class="product-card-volume">5L</span>
+              <span class="product-card-price"></span>
+            </div>
+          </div>
+
+          <!-- ── TEXTIL ── -->
+          <div class="product-card reveal reveal-delay-1" data-category="textil" data-cat="textil" data-id="rejillas">
             <div class="product-card-category">Textil</div>
             <div class="product-card-img">
               <img src="Fotos%20Dona%20sol/Rejillas.JPG" alt="Rejillas" />
@@ -502,7 +512,7 @@
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-1" data-category="textil" data-id="panos-de-piso" data-sizes="6 unid.|6u,25 unid.|25u">
+          <div class="product-card reveal reveal-delay-2" data-category="textil" data-cat="textil" data-id="panos-de-piso" data-sizes="6 unid.|6u,25 unid.|25u">
             <div class="product-card-category">Textil</div>
             <div class="product-card-img">
               <img src="Fotos%20Dona%20sol/Pa%C3%B1os%20de%20piso.JPG" alt="Paños de Piso" />
@@ -517,7 +527,7 @@
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-2" data-category="textil" data-id="franelas">
+          <div class="product-card reveal reveal-delay-3" data-category="textil" data-cat="textil" data-id="franelas">
             <div class="product-card-category">Textil</div>
             <div class="product-card-img">
               <img src="Fotos%20Dona%20sol/Franelas.JPG" alt="Franelas" />
@@ -532,7 +542,7 @@
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-3" data-category="textil" data-id="microfibras">
+          <div class="product-card reveal" data-category="textil" data-cat="textil" data-id="microfibras">
             <div class="product-card-category">Textil</div>
             <div class="product-card-img">
               <img src="Fotos%20Dona%20sol/Microfibras.jpg" alt="Microfibras" />
@@ -547,13 +557,13 @@
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-3" data-category="textil" data-id="guantes-negros">
+          <div class="product-card reveal reveal-delay-1" data-category="textil" data-cat="textil" data-id="guantes-negros" style="--z:1.05">
             <div class="product-card-category">Textil</div>
             <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Guantes_negros.jpg" alt="Guantes Negros" />
+              <img src="Fotos%20Dona%20sol/Guantes_negros.jpg" alt="Guantes de Látex Negros" />
             </div>
             <div class="product-card-body">
-              <div class="product-card-name">Guantes Negros</div>
+              <div class="product-card-name">Guantes de Látex Negros</div>
               <div class="product-card-desc">10 pares guantes de látex ultra resistentes, ideales para tareas pesadas. Excelente agarre en seco y mojado, gran durabilidad y comodidad. Perfectos para uso industrial, mantenimiento y construcción.</div>
             </div>
             <div class="product-card-footer">
@@ -562,13 +572,13 @@
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-1" data-category="textil" data-id="guantes-amarillos">
+          <div class="product-card reveal reveal-delay-2" data-category="textil" data-cat="textil" data-id="guantes-amarillos" style="--z:1.05">
             <div class="product-card-category">Textil</div>
             <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Guantes_amarillos.jpg" alt="Guantes Amarillos" />
+              <img src="Fotos%20Dona%20sol/Guantes_amarillos.jpg" alt="Guantes de Látex Amarillos" />
             </div>
             <div class="product-card-body">
-              <div class="product-card-name">Guantes Amarillos</div>
+              <div class="product-card-name">Guantes de Látex Amarillos</div>
               <div class="product-card-desc">10 Pares de guantes de látex natural de alta resistencia, ideales para tareas exigentes en industrias alimenticias, químicas o de mantenimiento. Clorinados y sin talco, con interior no felpado. Textura rugosa para mejor agarre, color amarillo distintivo y excelente protección para uso intensivo.</div>
             </div>
             <div class="product-card-footer">
@@ -578,13 +588,13 @@
           </div>
 
           <!-- ── PAPELES ── -->
-          <div class="product-card reveal" data-category="papeles" data-id="jumbo-200">
+          <div class="product-card reveal reveal-delay-3" data-category="papeles" data-cat="papeles" data-id="jumbo-200">
             <div class="product-card-category">Papeles</div>
             <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Jumbo%20200.jpg" alt="Jumbo 200" />
+              <img src="Fotos%20Dona%20sol/Jumbo%20200.jpg" alt="Toalla Jumbo 200" />
             </div>
             <div class="product-card-body">
-              <div class="product-card-name">Jumbo 200</div>
+              <div class="product-card-name">Toalla Jumbo 200</div>
               <div class="product-card-desc">Toalla en rollo de alta absorción. Ideal para uso profesional e industrial. Funda de 6 rollos.</div>
             </div>
             <div class="product-card-footer">
@@ -592,13 +602,13 @@
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-1" data-category="papeles" data-id="toalla-intercalada">
+          <div class="product-card reveal" data-category="papeles" data-cat="papeles" data-id="toalla-intercalada">
             <div class="product-card-category">Papeles</div>
             <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Toalla%20Intercalada%2020x23.jpg" alt="Toalla Intercalada 20x23" />
+              <img src="Fotos%20Dona%20sol/Toalla%20Intercalada%2020x23.jpg" alt="Toalla Intercalada 20 × 23" />
             </div>
             <div class="product-card-body">
-              <div class="product-card-name">Toalla Intercalada 20x23</div>
+              <div class="product-card-name">Toalla Intercalada 20 × 23</div>
               <div class="product-card-desc">Toalla interdoblada para dispensadores. Suave y de alta absorción. Caja de 4800 Unidades.</div>
             </div>
             <div class="product-card-footer">
@@ -606,7 +616,21 @@
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-2" data-category="papeles" data-id="servilleta-bocadillo">
+          <div class="product-card reveal reveal-delay-1" data-category="papeles" data-cat="papeles" data-id="rollo-cocina">
+            <div class="product-card-category">Papeles</div>
+            <div class="product-card-img">
+              <img src="Fotos%20Dona%20sol/Rollo%20Cocina%20200%20Hojas.webp" alt="Rollo de Cocina 200 Hojas" />
+            </div>
+            <div class="product-card-body">
+              <div class="product-card-name">Rollo de Cocina 200 Hojas</div>
+              <div class="product-card-desc">200 hojas por rollo. Alta absorción para uso doméstico y gastronómico. Funda de 12 Rollos.</div>
+            </div>
+            <div class="product-card-footer">
+              <span class="product-card-price"></span>
+            </div>
+          </div>
+
+          <div class="product-card reveal reveal-delay-2" data-category="papeles" data-cat="papeles" data-id="servilleta-bocadillo">
             <div class="product-card-category">Papeles</div>
             <div class="product-card-img">
               <img src="Fotos%20Dona%20sol/Servilleta%20de%20Bocadillo.jpg" alt="Servilleta de Bocadillo" />
@@ -620,27 +644,13 @@
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-3" data-category="papeles" data-id="rollo-cocina">
+          <div class="product-card reveal reveal-delay-3" data-category="papeles" data-cat="papeles" data-id="servilleta-mesa">
             <div class="product-card-category">Papeles</div>
             <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Rollo%20Cocina%20200%20Hojas.webp" alt="Rollo Cocina 200 Hojas" />
+              <img src="Fotos%20Dona%20sol/Servilleta%20de%20Mesa%2030x29%2C5.webp" alt="Servilleta de Mesa 30 × 29,5" />
             </div>
             <div class="product-card-body">
-              <div class="product-card-name">Rollo Cocina 200 Hojas</div>
-              <div class="product-card-desc">200 hojas por rollo. Alta absorción para uso doméstico y gastronómico. Funda de 12 Rollos.</div>
-            </div>
-            <div class="product-card-footer">
-              <span class="product-card-price"></span>
-            </div>
-          </div>
-
-          <div class="product-card reveal reveal-delay-1" data-category="papeles" data-id="servilleta-mesa">
-            <div class="product-card-category">Papeles</div>
-            <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/Servilleta%20de%20Mesa%2030x29%2C5.webp" alt="Servilleta de Mesa 30x29,5" />
-            </div>
-            <div class="product-card-body">
-              <div class="product-card-name">Servilleta de Mesa 30x29,5</div>
+              <div class="product-card-name">Servilleta de Mesa 30 × 29,5</div>
               <div class="product-card-desc">Servilleta grande para mesa. Ideal para restaurantes y eventos. 36 paquetes de 50 servilletas cada uno.</div>
             </div>
             <div class="product-card-footer">
@@ -648,13 +658,13 @@
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-3" data-category="papeles" data-id="servilleta-mesa-22x21">
+          <div class="product-card reveal" data-category="papeles" data-cat="papeles" data-id="servilleta-mesa-22x21">
             <div class="product-card-category">Papeles</div>
             <div class="product-card-img">
-              <img src="Fotos%20Dona%20sol/servilletaa.jpg" alt="Servilletas de mesa 22x21" />
+              <img src="Fotos%20Dona%20sol/servilletaa.jpg" alt="Servilleta de Mesa 22 × 21" />
             </div>
             <div class="product-card-body">
-              <div class="product-card-name">Servilletas de mesa 22x21</div>
+              <div class="product-card-name">Servilleta de Mesa 22 × 21</div>
               <div class="product-card-desc">Servilleta de mesa 22x21 cm. Ideal para uso diario en restaurantes y hogares. Caja de 72 paquetes de 50 servilletas cada uno.</div>
             </div>
             <div class="product-card-footer">
@@ -662,7 +672,7 @@
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-2" data-category="papeles" data-id="papel-higienico-dh">
+          <div class="product-card reveal reveal-delay-1" data-category="papeles" data-cat="papeles" data-id="papel-higienico-dh">
             <div class="product-card-category">Papeles</div>
             <div class="product-card-img">
               <img src="Fotos%20Dona%20sol/Pepel%20Higenico%20Doble%20Hoja.jpg" alt="Papel Higiénico Doble Hoja" />
@@ -676,7 +686,7 @@
             </div>
           </div>
 
-          <div class="product-card reveal reveal-delay-3" data-category="papeles" data-id="papel-higienico-jumbo">
+          <div class="product-card reveal reveal-delay-2" data-category="papeles" data-cat="papeles" data-id="papel-higienico-jumbo">
             <div class="product-card-category">Papeles</div>
             <div class="product-card-img">
               <img src="Fotos%20Dona%20sol/Papel%20Higenico%20Jumbo%20500.png" alt="Papel Higiénico Jumbo 500" />
@@ -844,6 +854,6 @@
   })();
   </script>
 
-  <script src="script.js?v=20261106c"></script>
+  <script src="script.js?v=20261109"></script>
 </body>
 </html>

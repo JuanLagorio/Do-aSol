@@ -1,27 +1,39 @@
 /* ============================================================
    DOÑA SOL · Catálogo
    Lo usan catalogo.html e index.html (admin.html tiene sus estilos).
-   Línea sobria: fondos neutros y el rojo y amarillo de la marca
-   como acento.
+   Mismos colores y tarjetas que la tienda de donasol.com.uy
+   (repo "Proyecto doña", css/styles.css): fondos crema y cada foto
+   sobre el color suave de su categoría.
 ============================================================ */
 :root {
   --red:        #D71920;
   --red-dark:   #B3121A;
+  --red-shadow: #6E0A0F;
   --red-tint:   #FDECEC;
   --yellow:     #FFC629;
   --yellow-soft:#FFE08A;
   --white:      #FFFFFF;
-  --ink:        #1C1917;
-  --ink-2:      #44403C;
-  --gray:       #78716C;
-  --line:       #E7E5E4;
-  --line-2:     #D6D3D1;
-  --paper:      #F7F6F3;
-  --soft:       #F2F1EE;
-  --wa:         #1FA855;
-  --wa-dark:    #158A43;
+  --ink:        #2A1512;
+  --ink-2:      #5B3D35;
+  --gray:       #8C6F64;
+  --line:       #EADBC1;
+  --line-2:     #E0C9A2;
+  --paper:      #FFFBF4;
+  --soft:       #FFF5E4;
+  --wa:         #13934C;
+  --wa-dark:    #0B5E30;
   --dark:       var(--ink);
   --gray-light: var(--soft);
+
+  /* Fondo de la foto según la categoría */
+  --tint-limpieza: #FFF3D9;
+  --tint-lavado:   #E9F1F6;
+  --tint-higiene:  #ECF4EC;
+  --tint-aromas:   #F8EAF1;
+  --tint-autos:    #EFECE7;
+  --tint-textil:   #FCEAE2;
+  --tint-papeles:  #F1EBDE;
+  --ease:       cubic-bezier(.2,.8,.2,1);
 
   --f-display:  'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --f-body:     'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -140,7 +152,7 @@ button { font: inherit; }
   position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--header-h);
-  background: rgba(255,255,255,.96);
+  background: rgba(255,251,244,.95);
   backdrop-filter: saturate(1.4) blur(12px);
   -webkit-backdrop-filter: saturate(1.4) blur(12px);
   border-bottom: 1px solid var(--line);
@@ -367,116 +379,148 @@ section { padding: 0; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 6px 6px 6px 6px;
+  gap: 12px;
+  padding: 7px;
   margin-bottom: 22px;
-  background: rgba(255,255,255,.95);
+  background: rgba(255,255,255,.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  box-shadow: 0 12px 28px -22px rgba(28,25,23,.4);
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  box-shadow: 0 14px 30px -24px rgba(90,30,10,.45);
 }
-.catalog-note { color: var(--gray); font-size: .85rem; padding-right: 10px; white-space: nowrap; }
+.catalog-note { color: var(--gray); font-size: .85rem; font-weight: 600; padding-right: 14px; white-space: nowrap; }
 
 .category-tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 24px; }
-.catalog-toolbar .category-tabs { margin-bottom: 0; }
+.catalog-toolbar .category-tabs {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  min-width: 0;
+  margin-bottom: 0;
+}
+.catalog-toolbar .category-tabs::-webkit-scrollbar { display: none; }
 .tab-btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   background: transparent;
   border: 0;
   color: var(--ink-2);
-  padding: .62em 1.1em;
-  border-radius: 8px;
+  padding: .66em 1.05em;
+  border-radius: 999px;
   font-size: .9rem;
-  font-weight: 600;
+  font-weight: 700;
+  white-space: nowrap;
   cursor: pointer;
-  transition: background var(--trans), color var(--trans);
+  transition: background-color .2s, color .2s;
 }
-.tab-btn:hover { background: var(--paper); color: var(--ink); }
+.tab-btn small { font-size: .72rem; font-weight: 800; opacity: .55; }
+.tab-btn:hover { background: var(--soft); color: var(--ink); }
 .tab-btn.active { background: var(--ink); color: var(--white); }
+.tab-btn.active small { opacity: .8; color: var(--yellow); }
 
-/* Grilla de productos */
+/* Grilla de productos: mismas tarjetas que la tienda de donasol.com.uy */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(212px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(206px, 1fr));
+  gap: 18px;
 }
+
+/* Color de fondo de la foto según la categoría (data-cat de la tarjeta) */
+[data-cat="limpieza"] { --tint: var(--tint-limpieza); }
+[data-cat="lavado"]   { --tint: var(--tint-lavado); }
+[data-cat="higiene"]  { --tint: var(--tint-higiene); }
+[data-cat="aromas"]   { --tint: var(--tint-aromas); }
+[data-cat="autos"]    { --tint: var(--tint-autos); }
+[data-cat="textil"]   { --tint: var(--tint-textil); }
+[data-cat="papeles"]  { --tint: var(--tint-papeles); }
 
 .product-card {
   position: relative;
   background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  overflow: hidden;
+  border: 1.5px solid var(--line);
+  border-radius: 24px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  transition: transform var(--trans), box-shadow var(--trans), border-color var(--trans), opacity .5s ease;
+  transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .3s;
 }
 .product-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-5px);
   border-color: var(--line-2);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 28px 44px -28px rgba(90,30,10,.45);
 }
 
-/* Rótulo "Textil" / "Papeles" sobre la foto (vacío en química) */
+/* Rótulo de la categoría sobre la foto */
 .product-card-category {
   position: absolute;
-  top: 12px; left: 12px;
+  top: 18px; left: 18px;
   z-index: 2;
-  background: rgba(255,255,255,.94);
+  background: rgba(255,255,255,.9);
   color: var(--ink-2);
-  font-size: .62rem;
-  font-weight: 700;
-  letter-spacing: .08em;
+  font-size: .66rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  line-height: 1.2;
   text-transform: uppercase;
-  padding: .42em .65em;
-  border-radius: 6px;
+  padding: .42em .75em;
+  border-radius: 999px;
 }
 .product-card-category:empty { display: none; }
 
+/* Foto: el blanco de la foto se funde con el color de la categoría.
+   --z agranda cada foto (lo pone la tarjeta; 1.2 si no tiene) */
 .product-card-img {
   position: relative;
-  margin: 6px 6px 0;
-  aspect-ratio: 1 / .92;
-  border-radius: 10px;
-  background: var(--soft);
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  isolation: isolate;
+  margin: 8px 8px 0;
+  aspect-ratio: 1;
+  border-radius: 18px;
+  background: var(--tint, var(--tint-limpieza));
 }
+/* Rayos de sol que giran al pasar el mouse */
+.product-card-img::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  z-index: -1;
+  background: repeating-conic-gradient(rgba(255,198,41,.3) 0deg 7deg, transparent 7deg 20deg);
+  opacity: 0;
+  transition: opacity .5s;
+  animation: spin 40s linear infinite paused;
+}
+.product-card:hover .product-card-img::before { opacity: 1; animation-play-state: running; }
 .product-card-img img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 12px;
   mix-blend-mode: multiply;
-  transition: transform .4s cubic-bezier(.2,.8,.2,1);
+  filter: brightness(1.03) contrast(1.04);
+  transform: scale(var(--z, 1.2));
+  transition: transform .6s var(--ease);
 }
-.product-card:hover .product-card-img img { transform: scale(1.05); }
-/* Las fotos de los bidones traen mucho margen blanco: se acercan un poco */
-[data-category="hogar"] .product-card-img img { transform: scale(1.2); }
-[data-category="hogar"]:hover .product-card-img img { transform: scale(1.26); }
-[data-id="suavizante"] .product-card-img img { padding: 0; object-fit: cover; transform: none; }
-[data-id="suavizante"]:hover .product-card-img img { transform: scale(1.04); }
+.product-card:hover .product-card-img img { transform: scale(calc(var(--z, 1.2) * 1.07)) rotate(-2deg); }
 
-.product-card-body { padding: 14px 16px 4px; flex: 1; }
+.product-card-body { padding: 14px 18px 0; flex: 1; }
 .product-card-name {
   font-family: var(--f-display);
-  font-weight: 700;
-  font-size: 1.02rem;
-  line-height: 1.25;
-  letter-spacing: -.01em;
+  font-weight: 820;
+  font-stretch: 104%;
+  font-size: 1.12rem;
+  line-height: 1.12;
+  letter-spacing: -.02em;
   color: var(--ink);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 .product-card-desc {
-  font-size: .84rem;
-  color: var(--gray);
+  font-size: .86rem;
+  color: var(--ink-2);
   line-height: 1.45;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -486,34 +530,35 @@ section { padding: 0; }
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
-  gap: 10px 10px;
-  padding: 10px 16px 16px;
+  gap: 12px 10px;
+  padding: 14px 18px 18px;
   margin-top: auto;
 }
 .product-card-volume {
   grid-column: 1 / -1;
   justify-self: start;
-  background: var(--paper);
-  border: 1px solid var(--line);
+  background: var(--soft);
+  border: 1.5px solid transparent;
   color: var(--ink-2);
-  font-size: .74rem;
-  font-weight: 600;
-  padding: .32em .7em;
-  border-radius: 6px;
+  font-size: .8rem;
+  font-weight: 700;
+  line-height: 1.1;
+  padding: .42em .72em;
+  border-radius: 10px;
   white-space: nowrap;
 }
-.size-selector { grid-column: 1 / -1; display: flex; gap: 5px; flex-wrap: wrap; }
+.size-selector { grid-column: 1 / -1; display: flex; gap: 6px; flex-wrap: wrap; }
 .size-btn {
-  background: var(--white);
-  border: 1px solid var(--line-2);
-  border-radius: 6px;
-  padding: .32em .7em;
-  font-size: .74rem;
-  font-weight: 600;
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: .42em .72em;
+  font-size: .8rem;
+  font-weight: 700;
+  line-height: 1.1;
   cursor: pointer;
   color: var(--ink-2);
-  transition: border-color .15s, background .15s, color .15s;
-  line-height: 1.4;
+  transition: border-color .2s, background-color .2s, color .2s;
   white-space: nowrap;
 }
 .size-btn:hover { border-color: var(--ink-2); color: var(--ink); }
@@ -522,9 +567,9 @@ section { padding: 0; }
 .product-card-price {
   grid-column: 1;
   font-family: var(--f-display);
-  font-size: 1.12rem;
-  font-weight: 700;
-  letter-spacing: -.015em;
+  font-size: 1.15rem;
+  font-weight: 850;
+  letter-spacing: -.02em;
   color: var(--ink);
   white-space: nowrap;
 }
@@ -540,35 +585,36 @@ section { padding: 0; }
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 7px;
   width: 100%;
-  height: 40px;
+  height: 46px;
   border: none;
-  border-radius: 10px;
+  border-radius: 14px;
   background: var(--red);
   color: #fff;
-  font-size: .88rem;
-  font-weight: 700;
+  font-size: .95rem;
+  font-weight: 800;
   cursor: pointer;
-  transition: background .15s, transform .1s;
+  box-shadow: 0 3px 0 var(--red-shadow);
+  transition: transform .15s var(--ease), box-shadow .15s var(--ease), background-color .2s;
 }
-.product-card-add-btn span { font-size: 1.15rem; line-height: 1; font-weight: 600; }
-.product-card-add-btn:hover  { background: var(--red-dark); }
-.product-card-add-btn:active { transform: translateY(1px); }
+.product-card-add-btn span { font-size: 1.2rem; line-height: 1; font-weight: 700; }
+.product-card-add-btn:hover  { background: #C3121A; transform: translateY(-1px); box-shadow: 0 4px 0 var(--red-shadow); }
+.product-card-add-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--red-shadow); }
 
 .card-qty-ctrl {
   display: none;
   align-items: center;
   justify-content: space-between;
-  height: 40px;
-  border-radius: 10px;
+  height: 46px;
+  border-radius: 14px;
   background: var(--ink);
   overflow: hidden;
 }
 .card-qty-ctrl-btn {
   background: none;
   border: none;
-  width: 40px; height: 100%;
+  width: 46px; height: 100%;
   display: flex; align-items: center; justify-content: center;
   font-size: 1.1rem;
   font-weight: 600;
@@ -729,14 +775,34 @@ footer { background: #171513; color: rgba(255,255,255,.7); padding: 52px 24px 28
   z-index: 10;
 }
 .pmodal-close:hover { background: var(--paper); }
+/* Misma foto que la tarjeta: color de la categoría y rayos de sol girando
+   (script.js copia data-cat y --z de la tarjeta) */
 .pmodal-img-wrap {
-  background: var(--soft);
-  height: 260px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  height: 340px;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--tint, var(--tint-limpieza));
 }
-.pmodal-img-wrap img { max-height: 100%; max-width: 100%; object-fit: contain; padding: 22px; mix-blend-mode: multiply; }
+.pmodal-img-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  z-index: -1;
+  background: repeating-conic-gradient(rgba(255,198,41,.28) 0deg 6deg, transparent 6deg 18deg);
+  animation: spin 50s linear infinite;
+}
+.pmodal-img-wrap img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  filter: brightness(1.03) contrast(1.04);
+  /* El recuadro es más ancho que alto: menos zoom que en la tarjeta, así no se corta */
+  transform: scale(calc(var(--z, 1.2) * .8));
+}
 .pmodal-body { padding: 24px 28px 28px; }
 .pmodal-body h2 {
   font-family: var(--f-display);
@@ -752,13 +818,13 @@ footer { background: #171513; color: rgba(255,255,255,.7); padding: 52px 24px 28
 .pmodal-body .product-card-volume,
 .pmodal-volume {
   display: inline-block;
-  background: var(--paper);
-  border: 1px solid var(--line);
+  background: var(--soft);
+  border: 0;
   color: var(--ink-2);
-  font-size: .8rem;
-  font-weight: 600;
-  padding: .35em .8em;
-  border-radius: 6px;
+  font-size: .85rem;
+  font-weight: 700;
+  padding: .45em .85em;
+  border-radius: 10px;
   margin-bottom: 20px;
 }
 .pmodal-btn-cart {
@@ -936,11 +1002,28 @@ footer { background: #171513; color: rgba(255,255,255,.7); padding: 52px 24px 28
 ============================================================ */
 .reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease, box-shadow var(--trans), border-color var(--trans); }
 .reveal.visible { opacity: 1; transform: none; }
-.reveal.visible:hover { transform: translateY(-3px); }
+.reveal.visible:hover { transform: translateY(-5px); }
 .reveal-delay-1 { transition-delay: .05s; }
 .reveal-delay-2 { transition-delay: .1s; }
 .reveal-delay-3 { transition-delay: .15s; }
 .reveal-delay-4 { transition-delay: .2s; }
+
+/* Las tarjetas entran con una animación (usa `translate`, así no frena
+   el levantarse al pasar el mouse, que usa `transform`). Al cambiar de
+   filtro vuelven a entrar. */
+.product-card.reveal {
+  transform: none;
+  transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .3s;
+  transition-delay: 0s;
+}
+.product-card.reveal.visible { animation: cardIn .55s var(--ease) var(--delay, 0s) backwards; }
+.product-card.reveal-delay-1 { --delay: .05s; }
+.product-card.reveal-delay-2 { --delay: .1s; }
+.product-card.reveal-delay-3 { --delay: .15s; }
+.product-card.reveal-delay-4 { --delay: .2s; }
+
+@keyframes cardIn { from { opacity: 0; translate: 0 16px; } to { opacity: 1; translate: none; } }
+@keyframes spin { to { rotate: 360deg; } }
 
 /* index.html usa Motion para el hover: se deshabilita el del CSS para no chocar */
 .motion-ready .product-card:hover { transform: none; box-shadow: var(--shadow-md); }
@@ -948,10 +1031,14 @@ footer { background: #171513; color: rgba(255,255,255,.7); padding: 52px 24px 28
 /* ============================================================
    RESPONSIVE
 ============================================================ */
+/* Con los 8 filtros no entra la nota al lado */
+@media (max-width: 1100px) {
+  .catalog-note { display: none; }
+}
+
 @media (max-width: 920px) {
   .catalog-top-inner { grid-template-columns: 1fr; gap: 32px; }
   .catalog-photos { justify-self: start; max-width: 520px; }
-  .catalog-note { display: none; }
   .catalog-ask { grid-template-columns: 1fr; padding: 16px 16px 20px; gap: 16px; }
   .catalog-ask-img { max-width: 420px; }
   .catalog-ask-txt { padding: 0 4px; }
@@ -978,24 +1065,25 @@ footer { background: #171513; color: rgba(255,255,255,.7); padding: 52px 24px 28
   .catalog-photos .catalog-photo-main { grid-column: auto; aspect-ratio: 1; border-radius: 10px; }
 
   .catalog-body { padding: 18px 12px 56px; }
-  .catalog-toolbar { top: calc(var(--header-h) + 8px); padding: 5px; margin-bottom: 14px; }
-  .category-tabs { flex-wrap: nowrap; width: 100%; }
-  .tab-btn { flex: 1 1 auto; padding: .6em .5em; font-size: .84rem; }
+  /* En el celular todas las categorías a la vista, sin deslizar */
+  .catalog-toolbar { top: calc(var(--header-h) + 6px); padding: 6px; margin-bottom: 14px; border-radius: 22px; }
+  .catalog-toolbar .category-tabs { flex-wrap: wrap; overflow: visible; gap: 5px; width: 100%; }
+  .tab-btn { flex: 1 1 auto; justify-content: center; padding: .62em .7em; font-size: .8rem; background: var(--soft); }
+  .tab-btn small { display: none; }
 
   .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 
-  .product-card { border-radius: 12px; }
-  .product-card-category { top: 9px; left: 9px; font-size: .56rem; }
-  .product-card-img { margin: 5px 5px 0; border-radius: 8px; }
-  .product-card-img img { padding: 8px; }
-  .product-card-body { padding: 10px 10px 2px; }
-  .product-card-name { font-size: .88rem; }
-  .product-card-desc { font-size: .74rem; line-height: 1.4; -webkit-line-clamp: 2; }
-  .product-card-footer { padding: 8px 10px 10px; gap: 7px; }
-  .product-card-volume, .size-btn { font-size: .68rem; padding: .3em .55em; }
-  .product-card-price { font-size: .95rem; }
-  .product-card-add-btn, .card-qty-ctrl { height: 36px; font-size: .82rem; border-radius: 9px; }
-  .card-qty-ctrl-btn { width: 34px; }
+  .product-card { border-radius: 20px; }
+  .product-card-category { top: 13px; left: 13px; font-size: .58rem; padding: .38em .6em; }
+  .product-card-img { margin: 6px 6px 0; border-radius: 15px; }
+  .product-card-body { padding: 10px 10px 0; }
+  .product-card-name { font-size: .96rem; margin-bottom: 6px; }
+  .product-card-desc { font-size: .78rem; line-height: 1.4; }
+  .product-card-footer { padding: 10px; gap: 8px 6px; }
+  .product-card-volume, .size-btn { font-size: .74rem; padding: .4em .55em; border-radius: 8px; }
+  .product-card-price { font-size: 1rem; }
+  .product-card-add-btn, .card-qty-ctrl { height: 42px; font-size: .88rem; border-radius: 12px; }
+  .card-qty-ctrl-btn { width: 38px; }
   /* Con precio, en el celular el botón va abajo del precio a todo el ancho */
   .product-card-add-btn, .card-qty-ctrl { grid-column: 1 / -1; }
 
@@ -1025,7 +1113,7 @@ footer { background: #171513; color: rgba(255,255,255,.7); padding: 52px 24px 28
     transform: translateY(100%);
   }
   .pmodal-overlay.open .pmodal { transform: none; }
-  .pmodal-img-wrap { height: 200px; }
+  .pmodal-img-wrap { height: 250px; }
   .pmodal-body { padding: 18px 18px 28px; }
   .pmodal-body h2 { font-size: 1.2rem; }
 
@@ -1034,9 +1122,9 @@ footer { background: #171513; color: rgba(255,255,255,.7); padding: 52px 24px 28
 
 @media (max-width: 380px) {
   .products-grid { gap: 8px; }
-  .product-card-name { font-size: .82rem; }
+  .product-card-name { font-size: .88rem; }
   .product-card-desc { display: none; }
-  .tab-btn { font-size: .78rem; }
+  .tab-btn { font-size: .76rem; padding: .6em .55em; }
 }
 
 @media (prefers-reduced-motion: reduce) {

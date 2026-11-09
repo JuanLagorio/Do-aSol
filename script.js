@@ -99,6 +99,7 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
   const waBtn      = document.getElementById('pmodal-wa');
   const addCartBtn = document.getElementById('pmodal-add-cart');
   const closeBtn   = overlay.querySelector('.pmodal-close');
+  const imgWrap    = overlay.querySelector('.pmodal-img-wrap');
 
   function openModal(name, desc, imgSrc, volume, productId, price) {
     imgEl.src            = imgSrc;
@@ -138,6 +139,14 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
       const cartId     = sizeKey ? productId + '_' + sizeKey : productId;
       const modalName  = sizeLabel ? name + ' (' + sizeLabel + ')' : name;
       const modalVol   = sizeLabel || volume;
+      // La foto del detalle lleva el mismo fondo de color y el mismo zoom que la tarjeta
+      if (imgWrap) {
+        if (card.dataset.cat) imgWrap.dataset.cat = card.dataset.cat;
+        else delete imgWrap.dataset.cat;
+        const z = card.style.getPropertyValue('--z');
+        if (z) imgWrap.style.setProperty('--z', z);
+        else imgWrap.style.removeProperty('--z');
+      }
       openModal(modalName, desc, img, modalVol, cartId, price);
     });
   });
@@ -419,18 +428,30 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
   const filterBar = document.getElementById('filter-bar');
   if (!filterBar) return;
 
+  const cards = document.querySelectorAll('.product-card');
+  // data-cat es la categoría fina (Limpieza, Ropa y vajilla…); data-category, la línea (hogar, textil, papeles)
+  const matches = (card, filter) =>
+    filter === 'todos' || card.dataset.cat === filter || card.dataset.category === filter;
+
+  // Cantidad de productos al lado de cada filtro, como en donasol.com.uy
+  filterBar.querySelectorAll('.tab-btn').forEach(btn => {
+    const n = [...cards].filter(card => matches(card, btn.dataset.filter)).length;
+    const small = document.createElement('small');
+    small.textContent = n;
+    btn.append(' ', small);
+  });
+
   filterBar.addEventListener('click', e => {
     const btn = e.target.closest('.tab-btn');
     if (!btn) return;
 
-    filterBar.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+    filterBar.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.toggle('active', b === btn);
+      b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+    });
 
     const filter = btn.dataset.filter;
-    document.querySelectorAll('.product-card').forEach(card => {
-      const match = filter === 'todos' || card.dataset.category === filter;
-      card.classList.toggle('hidden', !match);
-    });
+    cards.forEach(card => card.classList.toggle('hidden', !matches(card, filter)));
   });
 })();
 
